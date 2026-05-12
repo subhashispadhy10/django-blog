@@ -25,8 +25,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.home,name='home'),
     path('category/',include('blogs_app.urls')),
-    path('<slug:slug>/',blog_view.slug_blogs,name='slug_blogs'),
+    path('blogs_slug/<slug:slug>/',blog_view.slug_blogs,name='slug_blogs'),
     path('blog/search/',blog_view.search,name='search'),
+    path('registration/',blog_view.registration.as_view(),name='registration'),
+    path('login/',blog_view.login_view.as_view(),name='login'),
+    path('logout/',blog_view.logout_view,name='logout'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
