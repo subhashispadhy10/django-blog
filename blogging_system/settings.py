@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blogs_app',
     'assignment',
+    'dashboard',
 ]
 
 MIDDLEWARE = [

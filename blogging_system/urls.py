@@ -30,6 +30,7 @@ urlpatterns = [
     path('registration/',blog_view.registration.as_view(),name='registration'),
     path('login/',blog_view.login_view.as_view(),name='login'),
     path('logout/',blog_view.logout_view,name='logout'),
+    path('dashboard/',include('dashboard.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
