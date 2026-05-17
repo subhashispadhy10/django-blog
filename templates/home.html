@@ -3,8 +3,9 @@
     <main class="container">
       {% for i in featured %}
       {% if forloop.first %}
-      
+      {% if i.feature_image %}
       <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary hero_image" style="background-image: url({{i.feature_image.url}});">
+        {% endif %}
         <div class="col-lg-6 px-0">
           <h1 class="display-4 fst-italic text-white">
             {{i.title}}
@@ -51,6 +52,7 @@
                 </svg>
               </a>
             </div>
+            {% if i.feature_image %}
          <div class="col-auto d-none d-lg-block">
     <img src="{{ i.feature_image.url }}" 
          alt="{{ i.title }}" 
@@ -58,7 +60,7 @@
          height="250"
          class="bd-placeholder-img"
          style="object-fit: cover;">
-</div>
+</div> {% endif %}
           </div>
         </div>
         {% endif %}

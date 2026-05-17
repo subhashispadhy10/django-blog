@@ -26,10 +26,12 @@
                     </svg>
                 </a>
             </div>
+            {% if i.feature_image %}
             <div class="col-auto d-none d-lg-block">
                 <img src="{{ i.feature_image.url }}" alt="{{ i.title }}" width="200" height="250"
                     class="bd-placeholder-img" style="object-fit: cover;">
             </div>
+            {% endif %}
         </div>
     </div>
  {% endfor %}

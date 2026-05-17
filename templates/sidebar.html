@@ -3,7 +3,7 @@
     <div class="nav flex-column nav-pills bg-light" aria-orientation="vertical">
         <a href="{% url 'dashboard' %}" class="nav-link text-dark {% if request.resolver_match.url_name == 'dashboard'%}bg-warning{% endif %} ">Dashboard</a>
         <a href="{% url 'dash_category' %}" class="nav-link text-dark {% if request.resolver_match.url_name == 'dash_category' %}bg-warning{% endif %}">Categories</a>
-        <a href=" " class="nav-link text-dark  ">Posts</a>
+        <a href="{% url 'post' %}" class="nav-link text-dark {% if request.resolver_match.url_name == 'post' %}bg-warning{% endif %}  ">Posts</a>
         <a href="" class="nav-link text-dark">Logout</a>
     </div>
 </div>

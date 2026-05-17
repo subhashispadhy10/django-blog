@@ -19,7 +19,9 @@
                     <a class="badge bg-warning text-decoration-none text-light" href="#!">{{ slug.category_blog }}</a>
                 </header>
                 <!-- Preview image figure-->
+                 {% if slug.feature_image %}
                 <figure class="mb-4"><img class="img-fluid rounded" src="{{ slug.feature_image.url }}" alt="..." /></figure>
+                {% endif %}
                 <!-- Post content-->
                 <section class="mb-5">
                     <p class="fs-5 mb-4">{{ slug.short_description }}</p>
