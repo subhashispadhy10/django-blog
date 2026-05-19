@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
-from . models import category,Blog
+from django.http import HttpResponseRedirect
+from . models import category,Blog,Comment
 from django.db.models import Q
 from django.views import View
 from . forms import registration_form,login_form
@@ -17,7 +18,15 @@ def posts(request,id):
 
 def slug_blogs(request,slug):
     slug_post=Blog.objects.get(slug=slug,status='published')
-    return render(request,"slug_posts.html",{'slug':slug_post})
+    if request.method == 'POST':
+        user=request.user
+        cmt=request.POST.get('comment')
+        c=Comment(user=user,comment=cmt,blog=slug_post)
+        c.save()
+        return HttpResponseRedirect(request.path_info)
+    comment=Comment.objects.filter(blog=slug_post)
+    comment_count=comment.count()
+    return render(request,"slug_posts.html",{'slug':slug_post,'comment':comment,'cc':comment_count})
 
 def search(request):
     keyword=request.GET.get('keyword')

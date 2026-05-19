@@ -10,5 +10,8 @@ urlpatterns = [
   # post crud operaion
   path('dash_post/',views.post,name='post'),
   path('add_post/',views.add_post.as_view(),name='add_post'),
-  path('edit_post/<int:id>/',views.edit_post,name='edit_post')
+  path('edit_post/<int:id>/',views.edit_post,name='edit_post'),
+  path('users/',views.users,name='users'),
+  path('add_users/',views.add_users.as_view(),name='add_users'),
+  path('edit_users/<int:id>/',views.edit_users.as_view(),name='edit_users'),
 ]

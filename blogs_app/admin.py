@@ -11,3 +11,6 @@ class blog_admin(admin.ModelAdmin):
     prepopulated_fields={'slug':('title',)}
     list_display=['id','title','author','category_blog','status']
     search_fields=['id','title','category_blog__category']
+@admin.register(Comment)
+class commentadmin(admin.ModelAdmin):
+    list_display=['id','comment','blog']

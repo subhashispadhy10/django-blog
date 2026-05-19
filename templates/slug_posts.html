@@ -29,14 +29,14 @@
 
                     <!-- Comments -->
                     <h4>Comments ({{ comment_count }})</h4>
-                    {% if comments %}
-                        {% for comment in comments %}
+                    {% if comment %}
+                        {% for i in comment %}
                             <div class="card mt-1">
                                 <div class="card-body">
-                                    <p class="card-text mb-0">{{ comment }}</p>
+                                    <p class="card-text mb-0">{{ i }}</p>
                                     <span>
-                                        <small>By {{ comment.user }}</small>
-                                        <small>| {{ comment.created_at | timesince }} ago</small>
+                                        <small>By {{ i.user }}</small>
+                                        <small>| {{ i.created_at | timesince }} ago</small>
                                     </span>
                                 </div>
                             </div>
@@ -46,7 +46,7 @@
                     {% endif %}
                     <br>
                     <div class="form-group">
-                
+                {% if request.user.is_authenticated %}
                         <form action="" method="POST">
                             {% csrf_token %}
                             <div class="form-group">
@@ -55,9 +55,9 @@
                             </div>
 
                         </form>
-                    
-                        <p>Please <span><a href=" ">login</a></span> to write a comment!</p>
-             
+                    {% else %}
+                        <p>Please  <span><a href="{% url 'login' %}">login</a></span> to write a comment!</p>
+             {% endif %}
                     </div>
 
                 </section>

@@ -1,11 +1,12 @@
 from django.shortcuts import render,redirect
 from blogs_app.models import Blog,category
 from django.contrib.auth.decorators import login_required
-from . forms import add_category_form,Add_post_form
+from . forms import add_category_form,Add_post_form,users_add_form,edit_user_form
 from django.views import View
 from django.contrib import messages
 from django.utils.decorators import method_decorator
 from django.utils.text import slugify
+from django.contrib.auth.models import User
 
 
 @login_required(login_url='login')
@@ -92,3 +93,41 @@ def edit_post(request,id):
         messages.success(request,"blog Posts updated successfully")
         return redirect('post')
     return render(request,"edit_post.html",{'blog':blog_id})
+
+
+def users(request):
+    users=User.objects.all()
+    if request.GET.get('dlt'):
+        dlt_id=request.GET.get('dlt')
+        user_id=User.objects.get(id=dlt_id)
+        user_id.delete()
+        messages.warning(request,"User data is Deleted")
+        return redirect('users')
+    return render(request,"users.html",{'users':users})
+
+class add_users(View):
+    def get(self,request):
+        form=users_add_form()
+        return render(request,"add_users.html",{'form':form})
+    def post(self,request):
+        form=users_add_form(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request,"Users added successfully")
+            return redirect('users')
+        return render(request,"add_users.html",{'form':form})
+
+class edit_users(View):
+     def get(self,request,id):
+       user_id=User.objects.get(id=id)
+       form=edit_user_form(instance=user_id)
+       return render(request,"edit_users.html",{'form':form})
+     def post(self,request,id):
+         user_id=User.objects.get(id=id)
+         form=edit_user_form(request.POST,instance=user_id)
+         if form.is_valid():
+             form.save()
+             messages.success(request,"Edited Successfully")
+             return redirect('users')
+         return render(request,"edit_users.html",{'form':form})
+     
