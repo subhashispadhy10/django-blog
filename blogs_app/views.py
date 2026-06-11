@@ -29,7 +29,7 @@ def slug_blogs(request,slug):
     return render(request,"slug_posts.html",{'slug':slug_post,'comment':comment,'cc':comment_count})
 
 def search(request):
-    keyword=request.GET.get('keyword')
+    keyword=request.GET.get('keyword','').strip()
     blog=Blog.objects.filter(Q(title__icontains=keyword) | Q(short_description__icontains=keyword) | Q(blog_body__icontains=keyword))
     
     return render(request,"search.html",{'blog':blog,'keyword':keyword})
